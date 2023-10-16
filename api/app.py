@@ -9,6 +9,20 @@ def hello_world():
 def submit():
     input_name = request.form.get("name")
     input_age = request.form.get("age")
-    input_height = request.form.get("height")
-    yearOB = (2023 - int(input_age))
-    return render_template("hello.html", name=input_name, height=input_height, age=input_age, year_of_birth=yearOB)
+	surface = request.form.get("surface")
+	activity = request.form.get("activity")
+	storage = request.form.get("storage")
+
+	bicycle_recommendation = ""
+
+	if surface == "Road":
+		if storage == "Limited":
+			bicycle_recommendation = "Folding Bike"
+		elif activity == "Commuting":
+			bicycle_recommendation = "Hybrid Bike"
+		else:
+			bicycle_recommendation = "Road Bike"
+	elif surface = "Off-Road":
+		bicycle_recommendation == "Mountain Bike"
+
+    return render_template("hello.html", name=input_name, age=input_age, surface=surface, activity=activity, storage=storage, bicycle_recommendation=bicycle_recommendation)

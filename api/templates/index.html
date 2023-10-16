@@ -1,20 +1,31 @@
 <html>
 <head>
-<title>HW</title>
+<title>Bicycle Type Recommendation</title>
 </head>
 <body>
-<h1>HelloWorld!!!!</h1>
+<h1>Bicycle Type Recommendation</h1>
 <p>Goodbye</p>
-<p><i>Oct 16, 2023</i></p>
 <body style="background-color:rgb(66, 119, 235);"></body>
 <form action="/submit" method="post">
     <label for="namefield">Name:</label>
-    <input type="text" id="namefield" name="name">
-    <label for="heightfield">Height (CM):</label>
-    <input type="number" id="heightfield" name="height">
+	<input type="text" id="namefield" name="name"><br>
     <label for="agefield">Age:</label>
-    <input type="number" id="agefield" name="age">
-    <input type="submit" value="Submit">
+	<input type="number" id="agefield" name="age"><br><br>
+
+	<label>Surface:</label><br>
+	<input type="radio" name="surface" value="Road"> Road<br>
+	<input type="radio" name="surface" value="Off-Road"> Off-Road<br><br>
+
+	<label>Activity:</label><br>
+	<input type="radio" name="activity" value="Recreation"> Recreation<br>
+	<input type="radio" name="activity" value="Commuting"> Commuting<br><br>
+
+	<label>Surface:</label><br>
+	<input type="radio" name="storage" value="Limited"> Limited<br>
+	<input type="radio" name="storage" value="Not an Issue"> Not an Issue<br><br>
+
+	<input type="submit" value="Submit">
+	
     </form>
 </body>
 </html>

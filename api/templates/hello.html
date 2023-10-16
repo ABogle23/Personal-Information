@@ -2,6 +2,11 @@
     <h1>Hello {{ name }}!</h1>
     <p>Name: {{ name }}</p>
     <p>Height: {{ height }}</p>
-    <p>Age: {{ age }}</p>
-    <p>Year of Birth: {{ year_of_birth }}</p>
+	<p>Surface: {{ surface }}</p>
+	<p>Activity: {{ activity }}</p>
+	<p>Storage: {{ storage }}</p>
+
+	{% if recommendation %}
+		<p>Recommended Bicycle Type</p>
+	{% endif %}
 </body>
