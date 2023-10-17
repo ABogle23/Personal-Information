@@ -8,7 +8,7 @@ def hello_world():
 @app.route("/submit", methods=["POST"])
 def submit():
     input_name = request.form.get("name")
-    input_age = request.form.get("age")
+    input_height = request.form.get("height")
     surface = request.form.get("surface")
     activity = request.form.get("activity")
     storage = request.form.get("storage")
@@ -23,4 +23,4 @@ def submit():
     else:
     #elif surface == "Off-Road":
         bicycle_recommendation = "Mountain Bike"
-    return render_template("hello.html", name=input_name, age=input_age, surface=surface, activity=activity, storage=storage, bicycle_recommendation=bicycle_recommendation)
+    return render_template("hello.html", name=input_name, height=input_height, surface=surface, activity=activity, storage=storage, bicycle_recommendation=bicycle_recommendation)

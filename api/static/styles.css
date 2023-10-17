@@ -1,0 +1,25 @@
+body {
+    background-color: rgb(255, 213, 0);
+    font-family: 'Tilt Neon', sans-serif;
+    text-align: center;
+}
+
+label {
+    font-weight: 800;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.custom-button {
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 4px; 
+    font-size: 16px; 
+    transition: background-color 0.3s;
+}
+
+.custom-button:hover {
+    background-color: #45a049; 
+}
