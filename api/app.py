@@ -20,6 +20,7 @@ def submit():
             bicycle_recommendation = "Hybrid Bike"
         else:
             bicycle_recommendation = "Road Bike"
-    elif surface == "Off-Road":
-        bicycle_recommendation == "Mountain Bike"
+    else:
+    #elif surface == "Off-Road":
+        bicycle_recommendation = "Mountain Bike"
     return render_template("hello.html", name=input_name, age=input_age, surface=surface, activity=activity, storage=storage, bicycle_recommendation=bicycle_recommendation)
