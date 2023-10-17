@@ -1,21 +1,36 @@
-<body>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Tilt+Neon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <h1>Hello {{ name }}</h1>
     <p><strong>Name:</strong> {{ name }}</p>
-    <p><strong>Height:</strong> {{ height }}</p>
-	<p><strong>Surface:</strong> {{ surface }}</p>
-	<p><strong>Activity:</strong> {{ activity }}</p>
-	<p><strong>Storage:</strong> {{ storage }}</p>
-	<body style="background-color:rgb(255, 213, 0);"></body>
-	{% if bicycle_recommendation %}
-		<h2><strong>Recommended Bicycle Type:</strong> {{ bicycle_recommendation }}</h2>
-		{% if bicycle_recommendation == "Road Bike" %}
-			<img src="/static/road_bike.jpg" alt="Road bike">
-		{% elif bicycle_recommendation == "Folding Bike" %}
-			<img src="/static/folding_bike.jpg" alt="Folding Bike">
-		{% elif bicycle_recommendation == "Hybrid Bike" %}
-			<img src="/static/hybrid_bike.jpg" alt="Hybrid Bike">
-		{% elif bicycle_recommendation == "Mountain Bike" %}
-			<img src="/static/mountain_bike.jpg" alt="Mountain Bike">
-		{% endif %}
-	{% endif %}
-</body>
+    <p><strong>Height:</strong> {{ height }} cm</p>
+    <p><strong>Surface:</strong> {{ surface }}</p>
+    <p><strong>Activity:</strong> {{ activity }}</p>
+    <p><strong>Storage:</strong> {{ storage }}</p>
+    <body style="background-color: rgb(255, 213, 0)"></body>
+    {% if bicycle_recommendation %}
+    <h2>
+      <strong>Recommended Bicycle Type:</strong> {{ bicycle_recommendation }}
+    </h2>
+    {% if bicycle_recommendation == "Road Bike" %}
+    <img src="/static/road_bike.jpg" alt="Road bike" />
+    {% elif bicycle_recommendation == "Folding Bike" %}
+    <img src="/static/folding_bike.jpg" alt="Folding Bike" />
+    {% elif bicycle_recommendation == "Hybrid Bike" %}
+    <img src="/static/hybrid_bike.jpg" alt="Hybrid Bike" />
+    {% elif bicycle_recommendation == "Mountain Bike" %}
+    <img src="/static/mountain_bike.jpg" alt="Mountain Bike" />
+    {% endif %} {% endif %}
+  </body>
+</html>
