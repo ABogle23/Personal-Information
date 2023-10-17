@@ -5,8 +5,16 @@
 	<p>Surface: {{ surface }}</p>
 	<p>Activity: {{ activity }}</p>
 	<p>Storage: {{ storage }}</p>
-
-	{% if recommendation %}
-		<p>Recommended Bicycle Type</p>
+	<body style="background-color:rgb(255, 213, 0);"></body>
+	{% if bicycle_recommendation %}
+		<p>Recommended Bicycle Type: {{ bicycle_recommendation }}</p>
+		{% if recommendation == "Road Bike" %}
+			<img src="/images/road_bike.jpg" alt="Road bike">
+		{% if recommendation == "Folding Bike" %}
+			<img src="/images/folding_bike.jpg" alt="Folding Bike">
+		{% if recommendation == "Hybrid Bike" %}
+			<img src="/images/hybrid_bike.jpg" alt="Hybrid Bike">
+		{% if recommendation == "Mountain Bike" %}
+			<img src="/images/mountain_bike.jpg" alt="Mountain Bike">
 	{% endif %}
 </body>
