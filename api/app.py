@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
+
 @app.route("/")
 def hello_world():
     return render_template("index.html")
+
 
 @app.route("/submit", methods=["POST"])
 def submit():
@@ -21,6 +23,13 @@ def submit():
         else:
             bicycle_recommendation = "Road Bike"
     else:
-    #elif surface == "Off-Road":
         bicycle_recommendation = "Mountain Bike"
-    return render_template("hello.html", name=input_name, height=input_height, surface=surface, activity=activity, storage=storage, bicycle_recommendation=bicycle_recommendation)
+    return render_template(
+        "hello.html",
+        name=input_name,
+        height=input_height,
+        surface=surface,
+        activity=activity,
+        storage=storage,
+        bicycle_recommendation=bicycle_recommendation
+        )
