@@ -23,7 +23,7 @@ def submit():
         else:
             bicycle_recommendation = "Road Bike"
     else:
-        bicycle_recommendation = "Mountain Bike lol"
+        bicycle_recommendation = "Mountain Bike"
     return render_template(
         "hello.html",
         name=input_name,
