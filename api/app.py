@@ -19,16 +19,16 @@ def submit():
         if storage == "Limited":
             bicycle_recommendation = "Folding Bike"
         elif activity == "Commuting":
-            bicycle_recommendation = "Hybrid Bike"  
+            bicycle_recommendation = "Hybrid Bike"
         else:
             bicycle_recommendation = "Road Bike"
     else:
         bicycle_recommendation = "Mountain Bike"
     return render_template(
         "hello.html",
-        name=input_name,   
+        name=input_name,
         height=input_height,
-        surface=surface,    
+        surface=surface,
         activity=activity,
         storage=storage,
         bicycle_recommendation=bicycle_recommendation
