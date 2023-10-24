@@ -45,7 +45,7 @@ jobs:
       - name: Run bandit
         run: bandit -r api/app.py      
   deploy-to-vercel:
-    needs: unit-tests
+    needs: bandit-analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
