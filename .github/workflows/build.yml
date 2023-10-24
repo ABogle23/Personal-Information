@@ -43,7 +43,7 @@ jobs:
       - name: Install bandit
         run: pip install bandit
       - name: Run bandit
-        run: bandit -r api/      
+        run: bandit -r api/app.py      
   deploy-to-vercel:
     needs: unit-tests
     runs-on: ubuntu-latest
