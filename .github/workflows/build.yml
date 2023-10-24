@@ -14,8 +14,36 @@ jobs:
         run: pip install flake8
       - name: Run flake8
         run: flake8 api/
-  deploy-to-vercel:
+  unit-tests:
     needs: python-formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install pytest
+        run: pip install pytest
+      - name: Run tests
+        run: pytest
+  bandit-analysis:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install bandit
+        run: pip install bandit
+      - name: Run bandit
+        run: bandit -r api/      
+  deploy-to-vercel:
+    needs: bandit-analysis
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,3 +55,4 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
+
