@@ -27,7 +27,7 @@ jobs:
       - name: Install pytest
         run: pip install pytest
       - name: Run tests
-        run: pytest api/app_test.py
+        run: pytest
   bandit-analysis:
     needs: unit-tests
     runs-on: ubuntu-latest
