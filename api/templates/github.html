@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Github Account Information</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Tilt+Neon&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Github Account Information</h1>
+    <p>
+      This application will tell you about your account
+    </p>
+
+    <form action="/submit" method="post">
+      <label for="namefield">Github Username:</label>
+      <input type="text" id="namefield" name="github_username" /><br /><br />
+      <input type="submit" value="Find my Github!" class="custom-button" />
+    </form>
+  </body>
+</html>

@@ -35,6 +35,22 @@ def submit():
         )
 
 
+#github
+@app.route("/")
+def github_username():
+    return render_template("github.html")
+
+
+#github
+@app.route("/submit_github", methods=["POST"])
+def submit_github():
+    input_name = request.form.get("name")
+    return render_template(
+        "github_response.html",
+        name=input_name
+        )
+
+
 @app.route("/query", methods=["GET"])
 def test_query_return():
     q = request.args.get('q')
