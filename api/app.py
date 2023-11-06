@@ -1,3 +1,4 @@
+import requests
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -36,18 +37,29 @@ def submit():
 
 
 #github
-@app.route("/")
-def github_username():
+@app.route("/github")
+def github():
     return render_template("github.html")
 
 
 #github
 @app.route("/submit_github", methods=["POST"])
 def submit_github():
-    input_name = request.form.get("name")
+    github_username = request.form.get("github_username")
+
+    response = requests.get(f"https://api.github.com/users/{github_username}/repos")
+
+    if response.status_code == 200:
+        repos = response.json() # data returned is a list of ‘repository’ entities
+        for repo in repos:
+            print(repo["full_name"])
+    else:
+        return "Error fetching repos"
+
+
     return render_template(
         "github_response.html",
-        name=input_name
+        name=github_username
         )
 
 
