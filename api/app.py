@@ -50,11 +50,16 @@ def submit_github():
     response = requests.get(f"https://api.github.com/users/{github_username}/repos")
 
     if response.status_code == 200:
-        repos = response.json() # data returned is a list of ‘repository’ entities
-        for repo in repos:
-            print(repo["full_name"])
+        repos = response.json()
+        repo_names = [repo["full_name"] for repo in repos]
+        return render_template(
+            "github_response.html",
+            name=github_username,
+            repos=repo_names
+        )
     else:
-        return "Error fetching repos"
+        error_message = "Error fetching repositories. Please make sure the GitHub username is valid."
+        return render_template("github_response.html", name=github_username, error_message=error_message)
 
 
     return render_template(

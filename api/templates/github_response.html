@@ -19,7 +19,11 @@
       {% for repo in repos %}
         <li>{{ repo }}</li>
       {% endfor %}
+      {% if error_message %}
+        <p><strong>Error:</strong> {{ error_message }}</p>
+      {% endif %}
     </ul>
+    
 
   </body>
 </html>
