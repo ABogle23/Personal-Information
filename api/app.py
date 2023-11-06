@@ -49,13 +49,39 @@ def submit_github():
 
     response = requests.get(f"https://api.github.com/users/{github_username}/repos")
 
+
     if response.status_code == 200:
         repos = response.json()
-        repo_names = [repo["full_name"] for repo in repos]
+        repo_details = []
+
+        for repo in repos:
+            repo_name = repo["full_name"]
+            last_updated = repo["updated_at"]
+            commits_url = f"https://api.github.com/repos/{repo_name}/commits"
+            commits_response = requests.get(commits_url)
+            
+            if commits_response.status_code == 200:
+                commits = commits_response.json()
+                if commits:
+                    latest_commit = commits[0]
+                    commit_hash = latest_commit["sha"]
+                    author = latest_commit["commit"]["author"]["name"]
+                    commit_date = latest_commit["commit"]["author"]["date"]
+                    commit_message = latest_commit["commit"]["message"]
+
+                    repo_details.append({
+                        "name": repo_name,
+                        "last_updated": last_updated,
+                        "commit_hash": commit_hash,
+                        "author": author,
+                        "commit_date": commit_date,
+                        "commit_message": commit_message
+                    })
+
         return render_template(
             "github_response.html",
             name=github_username,
-            repos=repo_names
+            repos=repo_details
         )
     else:
         error_message = "Error fetching repositories. Please make sure the GitHub username is valid."
