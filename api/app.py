@@ -36,19 +36,17 @@ def submit():
         )
 
 
-#github
 @app.route("/github")
 def github():
     return render_template("github.html")
 
 
-#github
 @app.route("/submit_github", methods=["POST"])
 def submit_github():
     github_username = request.form.get("github_username")
 
-    response = requests.get(f"https://api.github.com/users/{github_username}/repos")
-
+    response = requests.get(
+        f"https://api.github.com/users/{github_username}/repos")
 
     if response.status_code == 200:
         repos = response.json()
@@ -59,7 +57,6 @@ def submit_github():
             last_updated = repo["updated_at"]
             commits_url = f"https://api.github.com/repos/{repo_name}/commits"
             commits_response = requests.get(commits_url)
-            
             if commits_response.status_code == 200:
                 commits = commits_response.json()
                 if commits:
@@ -84,14 +81,12 @@ def submit_github():
             repos=repo_details
         )
     else:
-        error_message = "Error fetching repositories. Please make sure the GitHub username is valid."
-        return render_template("github_response.html", name=github_username, error_message=error_message)
-
-
-    return render_template(
-        "github_response.html",
-        name=github_username
-        )
+        error_message = "Error fetching repositories. \
+            Please make sure the GitHub username is valid."
+        return render_template(
+            "github_response.html",
+            name=github_username,
+            error_message=error_message)
 
 
 @app.route("/query", methods=["GET"])
