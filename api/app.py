@@ -46,7 +46,7 @@ def submit_github():
     github_username = request.form.get("github_username")
 
     response = requests.get(
-        f"https://api.github.com/users/{github_username}/repos")
+        f"https://api.github.com/users/{github_username}/repos", timeout=10)
 
     if response.status_code == 200:
         repos = response.json()
@@ -56,7 +56,7 @@ def submit_github():
             repo_name = repo["full_name"]
             last_updated = repo["updated_at"]
             commits_url = f"https://api.github.com/repos/{repo_name}/commits"
-            commits_response = requests.get(commits_url)
+            commits_response = requests.get(commits_url, timeout=10)
             if commits_response.status_code == 200:
                 commits = commits_response.json()
                 if commits:
