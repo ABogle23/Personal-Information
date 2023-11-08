@@ -1,7 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Tilt+Neon&display=swap');
+
 body {
     background-color: rgb(255, 213, 0);
     font-family: 'Tilt Neon', sans-serif;
     text-align: center;
+}
+
+.body-github {
+    background-color: #E0E0E0; /* This sets the page background to grey */
+    display: flex;
+    margin: 0;
+    justify-content: center; /* Center the card horizontally */
+    min-height: 100vh; /* Make sure the body takes at least the full viewport height */
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    background-color: white; /* Set card background to white */
+    border-radius: 15px; /* Rounded corners for the card */
+    padding: 2em; /* Add some padding inside the card */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Optional: Adds a subtle shadow to the card */
+    margin: 2em; /* Add some margin around the card */
+    box-sizing: border-box; /* Include padding in the box's width */
+    /* Flexbox properties to center content */
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center; /* Align children vertically */
+    align-items: center; /* Align children horizontally */
+    overflow: auto;
+}
+
+.card.github {
+    max-height: 500px;
+}
+
+.card.response-summary {
+    width: 100%;
+    min-height: 300px;
+    max-height: 500px;
 }
 
 label {
@@ -22,4 +65,30 @@ label {
 
 .custom-button:hover {
     background-color: #45a049; 
+}
+
+/* table */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px; /* Adds space between cells */
+}
+
+td, th {
+    padding: 8px;
+    text-align: left;
+    border-radius: 8px; /* Rounds the corners of each cell */
+}
+
+th {
+    background-color: #4CAF50;
+}
+
+tr:nth-child(even) td {
+    background-color: #e8e8e8; /* A slightly darker grey for even rows */
+}
+
+tr:nth-child(odd) td {
+    background-color: #f9f9f9; /* A lighter grey for odd rows */
 }

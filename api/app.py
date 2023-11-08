@@ -1,4 +1,5 @@
 import requests
+from requests_oauthlib import OAuth1
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -75,11 +76,24 @@ def submit_github():
                         "commit_message": commit_message
                     })
 
+        socials_response = requests.get(
+        f"https://api.github.com/users/{github_username}/social_accounts", timeout=10)
+    
+        if socials_response.status_code == 200:
+            socials = socials_response.json()
+            first_social_url = socials[0]["url"] if socials else None
+
+            return render_template(
+                "github_response.html",
+                name=github_username,
+                repos=repo_details,
+                social_url=first_social_url)
+        
         return render_template(
             "github_response.html",
             name=github_username,
-            repos=repo_details
-        )
+            repos=repo_details)
+        
     else:
         error_message = "Error fetching repositories. \
             Please make sure the GitHub username is valid."
