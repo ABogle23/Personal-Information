@@ -8,9 +8,32 @@
   </head>
 
   <body>
-    <div>
-      <h1>Twitter Account Information</h1>
-      <p>This application will tell you about your account</p>
-    </div>
+    <h2>Twitter Profile Details</h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Created At</th>
+        <th>Profile Image</th>
+        <th>Followers Count</th>
+        <th>Following Count</th>
+        <th>Tweet Count</th>
+      </tr>
+      {% for detail in twitter_details %}
+      <tr>
+        <td>{{ detail.id }}</td>
+        <td>{{ detail.name }}</td>
+        <td>{{ detail.username }}</td>
+        <td>{{ detail.created_at }}</td>
+        <td>
+          <img src="{{ detail.profile_image_url }}" alt="Profile Image" />
+        </td>
+        <td>{{ detail.followers_count }}</td>
+        <td>{{ detail.following_count }}</td>
+        <td>{{ detail.tweet_count }}</td>
+      </tr>
+      {% endfor %}
+    </table>
   </body>
 </html>

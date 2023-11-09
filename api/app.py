@@ -48,13 +48,56 @@ def twitter_test():
     api_key = os.getenv("api_key")
     api_key_secret = os.getenv("api_key_secret")
 
-    url = 'https://api.twitter.com/2/users/me'
+    url = (
+        "https://api.twitter.com/2/users/me?"
+        "user.fields=id,name,username,created_at,"
+        "profile_image_url,public_metrics"
+    )
+
     auth = OAuth1(api_key, api_key_secret, access_token, access_token_secret)
 
-    request_response = requests.get(url, auth=auth, timeout=10)
-    print(request_response.json())
+    # Initialize twitter_details with default 'not found' values
+    twitter_details = [{
+        "id": "not found",
+        "name": "not found",
+        "username": "not found",
+        "created_at": "not found",
+        "profile_image_url": "not found",
+        "followers_count": "not found",
+        "following_count": "not found",
+        "tweet_count": "not found"
+    }]
 
-    return render_template("twitter_test.html")
+    try:
+        request_response = requests.get(url, auth=auth, timeout=10)
+
+        if request_response.status_code == 200:
+            twitter_data = request_response.json()
+            # Clear the default values
+            twitter_details.clear()
+
+            user_data = twitter_data.get("data", {})
+            # Update the twitter_details list with actual data
+            # or default to 'not found'
+            twitter_details.append({
+                "id": user_data.get("id", "not found"),
+                "name": user_data.get("name", "not found"),
+                "username": user_data.get("username", "not found"),
+                "created_at": user_data.get("created_at", "not found"),
+                "profile_image_url": user_data.get(
+                    "profile_image_url", "not found"),
+                "followers_count": user_data.get(
+                    "public_metrics", {}).get("followers_count", "not found"),
+                "following_count": user_data.get(
+                    "public_metrics", {}).get("following_count", "not found"),
+                "tweet_count": user_data.get(
+                    "public_metrics", {}).get("tweet_count", "not found")
+            })
+    except requests.RequestException as e:
+        print(f"An error occurred: {e}")
+
+    return render_template(
+        "twitter_test.html", twitter_details=twitter_details)
 
 
 @app.route("/github")
@@ -107,12 +150,10 @@ def submit_github():
             if socials:
                 first_social_url = socials[0]["url"].split("/")[-1]
             else:
-                msg = "there is no social account \
-                    associated with this github account"
+                msg = "none"
                 first_social_url = msg
         else:
-            msg = "there is no social account \
-                associated with this github account"
+            msg = "none"
             first_social_url = msg
 
         return render_template(

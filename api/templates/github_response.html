@@ -40,10 +40,13 @@
       <div class="horizontal-container">
         <div class="card">
           <img src="/static/logo-black.png" alt="X logo" width="30px" />
+          {% if social_url == 'none' %}
+          <p>There is no social account associated with this GitHub account.</p>
+          {% else %}
+          <p>The GitHub account's associated social handle is:</p>
           <p>{{ social_url }}</p>
+          {% endif %}
         </div>
-
-        <div class="card">Hello</div>
       </div>
     </div>
   </body>
