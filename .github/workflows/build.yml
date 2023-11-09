@@ -30,6 +30,10 @@ jobs:
         run: pip install flask
       - name: Install requests
         run: pip install requests
+      - name: Install requests_oauthlib
+        run: pip install requests_oauthlib
+      - name: Install python-dotenv
+        run: pip install python-dotenv
       - name: Run tests
         run: pytest
   bandit-analysis:
@@ -45,7 +49,7 @@ jobs:
       - name: Install bandit
         run: pip install bandit
       - name: Run bandit
-        run: bandit -r api/app.py      
+        run: bandit -r api/app.py
   deploy-to-vercel:
     needs: bandit-analysis
     runs-on: ubuntu-latest
@@ -59,4 +63,3 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
-

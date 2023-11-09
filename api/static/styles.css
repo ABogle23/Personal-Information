@@ -21,6 +21,13 @@ body {
     align-items: center;
 }
 
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .card {
     background-color: white; /* Set card background to white */
     border-radius: 15px; /* Rounded corners for the card */

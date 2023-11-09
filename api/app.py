@@ -1,7 +1,11 @@
 import requests
+import os
 from requests_oauthlib import OAuth1
+from dotenv import load_dotenv
 from flask import Flask, render_template, request
+
 app = Flask(__name__)
+load_dotenv()
 
 
 @app.route("/")
@@ -37,6 +41,22 @@ def submit():
         )
 
 
+@app.route("/twitter_test")
+def twitter_test():
+    access_token = os.getenv("access_token")
+    access_token_secret = os.getenv("access_token_secret")
+    api_key = os.getenv("api_key")
+    api_key_secret = os.getenv("api_key_secret")
+
+    url = 'https://api.twitter.com/2/users/me'
+    auth = OAuth1(api_key, api_key_secret, access_token, access_token_secret)
+
+    request_response = requests.get(url, auth=auth)
+    print(request_response.json())
+
+    return render_template("twitter_test.html")
+
+
 @app.route("/github")
 def github():
     return render_template("github.html")
@@ -45,6 +65,8 @@ def github():
 @app.route("/submit_github", methods=["POST"])
 def submit_github():
     github_username = request.form.get("github_username")
+
+    # Get information about the user's repositories and thus commits
 
     response = requests.get(
         f"https://api.github.com/users/{github_username}/repos", timeout=10)
@@ -77,23 +99,28 @@ def submit_github():
                     })
 
         socials_response = requests.get(
-        f"https://api.github.com/users/{github_username}/social_accounts", timeout=10)
-    
+            f"https://api.github.com/users/{github_username}/social_accounts",
+            timeout=10)
+
         if socials_response.status_code == 200:
             socials = socials_response.json()
-            first_social_url = socials[0]["url"] if socials else None
+            if socials:
+                first_social_url = socials[0]["url"].split("/")[-1]
+            else:
+                msg = "there is no social account \
+                    associated with this github account"
+                first_social_url = msg
+        else:
+            msg = "there is no social account \
+                associated with this github account"
+            first_social_url = msg
 
-            return render_template(
-                "github_response.html",
-                name=github_username,
-                repos=repo_details,
-                social_url=first_social_url)
-        
         return render_template(
             "github_response.html",
             name=github_username,
-            repos=repo_details)
-        
+            repos=repo_details,
+            social_url=first_social_url)
+
     else:
         error_message = "Error fetching repositories. \
             Please make sure the GitHub username is valid."
