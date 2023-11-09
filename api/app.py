@@ -51,7 +51,7 @@ def twitter_test():
     url = 'https://api.twitter.com/2/users/me'
     auth = OAuth1(api_key, api_key_secret, access_token, access_token_secret)
 
-    request_response = requests.get(url, auth=auth)
+    request_response = requests.get(url, auth=auth, timeout=10)
     print(request_response.json())
 
     return render_template("twitter_test.html")
